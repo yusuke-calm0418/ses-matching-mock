@@ -1,0 +1,5 @@
+SES Match — 公開バージョン3
+Source commit: 6dcf8790143ec7d6f9629f91438bc375d87fe950
+Source: https://ses-match-navigator.uyngs73w.chatgpt.site
+Retrieved: 2026-11-02
+Files: dist/index.html, dist/style.css, dist/data.js, dist/folder-import.js, dist/app.js
