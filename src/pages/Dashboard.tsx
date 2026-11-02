@@ -15,20 +15,22 @@ function Skills({ values }: { values: string[] }) {
 
 const actions: { page: PageId; icon: IconName; title: string }[] = [
   { page: 'mail', icon: 'mail', title: '案件メール取り込み' },
-  { page: 'talent', icon: 'users', title: '人材情報取り込み' },
+  { page: 'talent', icon: 'users', title: '人材メール取り込み' },
+  { page: 'review', icon: 'check', title: '取り込み結果確認' },
   { page: 'matching', icon: 'matching', title: 'マッチング' },
 ]
 
-export function Dashboard({ data, onNavigate }: {
+export function Dashboard({ data, pendingCounts, onNavigate }: {
   data: DashboardData
+  pendingCounts: { projects: number; talents: number }
   onNavigate: (page: PageId) => void
 }) {
   const [query, setQuery] = useState('')
   const [status, setStatus] = useState('すべて')
   const [detail, setDetail] = useState<Project | Talent | Match | null>(null)
   const [matches, setMatches] = useState(data.matches)
-  const pendingProjects = data.projects.filter(p => p.status === '確認待ち').length
-  const pendingTalents = data.talents.filter(t => t.status === '確認待ち').length
+  const pendingProjects = pendingCounts.projects
+  const pendingTalents = pendingCounts.talents
   const metrics = [
     {
       label: '登録案件数', count: data.projects.length, unit: '件',
@@ -177,6 +179,7 @@ export function Dashboard({ data, onNavigate }: {
           title={'title' in detail ? detail.title : 'name' in detail ? detail.name : 'マッチング詳細'}
           onClose={() => setDetail(null)}
         >
+          {'source' in detail && detail.source && <p className="source-reference">取り込み元：{detail.source.fileName}</p>}
           {'title' in detail ? (
             <>
               <p className="detail-id">{detail.id} · {detail.company}</p>
@@ -195,11 +198,13 @@ export function Dashboard({ data, onNavigate }: {
               <p className="detail-id">{detail.id} · {detail.role}</p>
               <Status value={detail.status} />
               <dl>
+                {detail.company && <><dt>所属</dt><dd>{detail.company}</dd></>}
                 <dt>経験年数</dt><dd>{detail.experience}</dd>
                 <dt>希望月額単価</dt><dd>{detail.rate}</dd>
                 <dt>稼働可能時期</dt><dd>{detail.available}</dd>
               </dl>
               <Skills values={detail.skills} />
+              {detail.description && <p className="detail-description">{detail.description}</p>}
             </>
           ) : selectedMatch && (
             <>

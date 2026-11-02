@@ -1,6 +1,12 @@
 export type PageId = 'dashboard' | 'mail' | 'talent' | 'review' | 'matching'
 export type RecordStatus = '募集中' | '確認待ち' | '提案中' | '稼働可能'
+export interface MailSource {
+  mailId: string
+  fileName: string
+  subject: string
+}
 export interface Project {
+  source?: MailSource
   id: string
   title: string
   company: string
@@ -13,6 +19,9 @@ export interface Project {
   description: string
 }
 export interface Talent {
+  source?: MailSource
+  company?: string
+  description?: string
   id: string
   name: string
   role: string

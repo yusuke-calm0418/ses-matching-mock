@@ -1,15 +1,11 @@
-import type { PageId } from '../types/dashboard'
 import { navigation } from '../data/navigation'
 
 const plans = {
-  mail: ['メール一覧・本文の表示', '案件情報の抽出', '抽出結果の確認'],
-  talent: ['スキルシートの選択', '人材情報の抽出', '登録内容のプレビュー'],
-  review: ['抽出結果の表示・編集', '必須項目の確認', '案件・人材の登録'],
   matching: ['案件・人材の選択', 'マッチングの実行', '候補と適合理由の比較'],
 }
 
 export function PlannedPage({ page, onBack }: {
-  page: Exclude<PageId, 'dashboard'>
+  page: 'matching'
   onBack: () => void
 }) {
   const item = navigation.find(item => item.id === page)!

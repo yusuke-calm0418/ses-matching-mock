@@ -1,5 +1,6 @@
-export type IconName = 'grid' | 'mail' | 'users' | 'check' | 'matching' | 'arrow' | 'search' | 'briefcase' | 'close' | 'clock'
+export type IconName = 'grid' | 'mail' | 'users' | 'check' | 'matching' | 'arrow' | 'search' | 'briefcase' | 'close' | 'clock' | 'folder'
 const paths: Record<IconName, string> = {
+  folder: 'M3 7V4h6l2 3h10v13H3z',
   grid: 'M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z',
   mail: 'M3 5h18v14H3z M3 6l9 7 9-7',
   users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8 M17 4a4 4 0 0 1 0 8 M22 21v-2a4 4 0 0 0-3-3.87',
